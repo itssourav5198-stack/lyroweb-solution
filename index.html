@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lyroweb Solution — Internship Programme</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --green:#1A7A4A;
+  --green-light:#22A05A;
+  --green-pale:#E8F5EE;
+  --gold:#C9A84C;
+  --gold-light:#E8C96A;
+  --gold-pale:#FBF5E6;
+  --gray:#F4F4F2;
+  --gray-mid:#888;
+  --border:#E0E0DC;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1200px;margin:0 auto}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:2px}
+.nav-logo span{color:var(--green)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--green);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--black)}
+.nav-cta{background:var(--black);color:var(--white);padding:8px 20px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--green)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--black);border-radius:2px;transition:0.3s}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;background:var(--black);position:relative;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(26,122,74,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(26,122,74,0.08) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-gold-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--gold-light);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%}
+h1{font-family:var(--font-display);font-size:clamp(40px,5vw,68px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:20px}
+h1 .green{color:var(--green-light)}
+h1 .gold{color:var(--gold)}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:36px;max-width:480px;line-height:1.7}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--green);color:var(--white);padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;transition:all 0.2s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--green-light);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--white);padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:32px;margin-top:48px;flex-wrap:wrap}
+.stat{border-left:2px solid var(--gold);padding-left:16px}
+.stat-num{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--white)}
+.stat-label{font-size:12px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px}
+.hero-right{display:flex;flex-direction:column;gap:14px}
+.track-pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:14px;transition:all 0.2s}
+.track-pill:hover{background:rgba(26,122,74,0.12);border-color:rgba(26,122,74,0.3);transform:translateX(4px)}
+.track-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.track-icon.g{background:rgba(26,122,74,0.2)}
+.track-icon.gold{background:rgba(201,168,76,0.15)}
+.track-name{font-size:14px;font-weight:500;color:var(--white)}
+.track-desc{font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* SECTIONS COMMON */
+section{padding:90px 5%}
+.section-inner{max-width:1200px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--black);line-height:1.2;margin-bottom:16px}
+.section-sub{font-size:16px;color:var(--gray-mid);max-width:560px;line-height:1.7}
+
+/* ABOUT */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.about-card{border:1px solid var(--border);border-radius:14px;padding:32px;position:relative;overflow:hidden;transition:all 0.2s}
+.about-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.07);transform:translateY(-2px)}
+.about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.about-card.lyroweb::before{background:var(--green)}
+.about-card.sohima::before{background:var(--gold)}
+.about-card.lyricist::before{background:linear-gradient(90deg,var(--green),var(--gold))}
+.card-logo{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:12px}
+.card-logo .g{color:var(--green)}
+.card-logo .gold{color:var(--gold)}
+.card-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:16px}
+.tag-green{background:var(--green-pale);color:var(--green)}
+.tag-gold{background:var(--gold-pale);color:#8B6914}
+.about-card p{font-size:14px;color:var(--gray-mid);line-height:1.7}
+
+/* PROGRAMME */
+#programme{background:var(--gray)}
+.tracks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:56px}
+.track-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px;transition:all 0.2s;cursor:default}
+.track-card:hover{border-color:var(--green);box-shadow:0 4px 20px rgba(26,122,74,0.08)}
+.track-emoji{font-size:28px;margin-bottom:16px}
+.track-card h3{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:8px}
+.track-card p{font-size:13px;color:var(--gray-mid);line-height:1.6}
+
+.perks-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.perk-box{border-radius:14px;padding:32px;position:relative;overflow:hidden}
+.perk-box.green-box{background:var(--black);color:var(--white)}
+.perk-box.gold-box{background:var(--gold-pale);border:1px solid rgba(201,168,76,0.3)}
+.perk-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.perk-box.green-box .perk-label{color:var(--green-light)}
+.perk-box.gold-box .perk-label{color:#8B6914}
+.perk-box h3{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:8px}
+.perk-box.green-box h3{color:var(--white)}
+.perk-box.gold-box h3{color:var(--black)}
+.perk-box p{font-size:14px;line-height:1.6}
+.perk-box.green-box p{color:rgba(255,255,255,0.6)}
+.perk-box.gold-box p{color:#666}
+
+.docs-row{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+.doc-chip{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 20px;font-size:14px;font-weight:500;flex:1;min-width:200px}
+.doc-chip::before{content:'📄';font-size:18px}
+
+/* HOW TO APPLY */
+#apply{background:var(--white)}
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative}
+.steps-row::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--border);z-index:0}
+.step{text-align:center;position:relative;z-index:1}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--black);color:var(--white);font-family:var(--font-display);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:3px solid var(--white);box-shadow:0 0 0 1px var(--border)}
+.step:nth-child(2) .step-num{background:var(--green)}
+.step:nth-child(3) .step-num{background:var(--gold)}
+.step:nth-child(4) .step-num{background:var(--green)}
+.step h3{font-size:15px;font-weight:600;margin-bottom:8px}
+.step p{font-size:13px;color:var(--gray-mid);padding:0 12px}
+
+.apply-cta-box{margin-top:60px;background:var(--black);border-radius:20px;padding:56px;text-align:center;position:relative;overflow:hidden}
+.apply-cta-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,122,74,0.2),transparent 50%,rgba(201,168,76,0.1));pointer-events:none}
+.apply-cta-box h2{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--white);margin-bottom:12px}
+.apply-cta-box p{color:rgba(255,255,255,0.55);margin-bottom:32px;font-size:15px}
+.apply-cta-box .btn-primary{font-size:16px;padding:16px 40px}
+
+/* CONTACT */
+#contact{background:var(--gray)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:56px;align-items:start}
+.contact-info h3{font-family:var(--font-display);font-size:24px;font-weight:700;margin-bottom:16px}
+.contact-info p{font-size:15px;color:var(--gray-mid);line-height:1.7;margin-bottom:24px}
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--black);font-size:14px;font-weight:500;transition:color 0.2s}
+.contact-link:hover{color:var(--green)}
+.contact-link-icon{width:36px;height:36px;background:var(--white);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.contact-form{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--black)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:14px;color:var(--black);background:var(--white);outline:none;transition:border-color 0.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-submit{width:100%;background:var(--green);color:var(--white);border:none;padding:13px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:background 0.2s}
+.form-submit:hover{background:var(--green-light)}
+
+/* FOOTER */
+footer{background:var(--black);padding:40px 5%;color:rgba(255,255,255,0.4);font-size:13px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
+.footer-logo{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--white)}
+.footer-logo span{color:var(--green)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--white)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .steps-row{grid-template-columns:1fr 1fr;gap:32px}
+  .steps-row::before{display:none}
+  .perks-row{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .footer-inner{flex-direction:column;gap:16px;text-align:center}
+}
+@media(max-width:600px){
+  .steps-row{grid-template-columns:1fr}
+  .apply-cta-box{padding:36px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Lyroweb<span>.Solution</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#apply">How to Apply</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://forms.gle/QqoRSmq1KvZ1KZBx6" target="_blank" class="nav-cta">Apply Now</a>
+    <div class="hamburger" onclick="this.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-gold-line"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Now Accepting Applications</div>
+      <h1>Build. Create.<br/><span class="green">Get Certified.</span><br/><span class="gold">Get Released.</span></h1>
+      <p class="hero-sub">Join Lyroweb Solution's 1-month remote internship — work on real projects across web, music, AI, and design. The best work gets officially released.</p>
+      <div class="hero-btns">
+        <a href="https://forms.google.com" target="_blank" class="btn-primary">Apply for Free</a>
+        <a href="#programme" class="btn-secondary">See All Tracks →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Tracks</div></div>
+        <div class="stat"><div class="stat-num">1 Mo</div><div class="stat-label">Duration</div></div>
+        <div class="stat"><div class="stat-num">Free</div><div class="stat-label">To Join</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Certificates</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="track-pill"><div class="track-icon g">🌐</div><div><div class="track-name">Web Development</div><div class="track-desc">HTML · CSS · JavaScript</div></div></div>
+      <div class="track-pill"><div class="track-icon g">📱</div><div><div class="track-name">App Development</div><div class="track-desc">Mobile & Web Apps</div></div></div>
+      <div class="track-pill"><div class="track-icon gold">🎵</div><div><div class="track-name">Song Writing</div><div class="track-desc">Lyrics · Composition</div></div></div>
+      <div class="track-pill"><div class="track-icon gold">🎬</div><div><div class="track-name">AI Short Movie</div><div class="track-desc">Script · AI Generation</div></div></div>
+      <div class="track-pill"><div class="track-icon gold">🎤</div><div><div class="track-name">Singing</div><div class="track-desc">Vocals · Recording</div></div></div>
+      <div class="track-pill"><div class="track-icon g">🎨</div><div><div class="track-name">Poster & Design</div><div class="track-desc">Canva · Templates</div></div></div>
+      <div class="track-pill"><div class="track-icon g">🤖</div><div><div class="track-name">AI Voice Agent</div><div class="track-desc">AI-powered voice tools</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="eyebrow">Who We Are</div>
+    <h2 class="section-title">Three brands.<br/>One vision.</h2>
+    <p class="section-sub">Lyroweb Solution operates under Sohima Production, with Mr. Lyricist as our official music distribution label — giving interns a real platform for their work.</p>
+    <div class="about-grid">
+      <div class="about-card lyroweb">
+        <div class="card-logo">Lyroweb<span class="g"> Solution</span></div>
+        <span class="card-tag tag-green">Web & Tech</span>
+        <p>A web development company focused on building websites and web apps for small businesses across India. Fast delivery, affordable pricing, and team-managed hosting — that's our promise.</p>
+      </div>
+      <div class="about-card sohima">
+        <div class="card-logo"><span class="gold">Sohima</span> Production</div>
+        <span class="card-tag tag-gold">Parent Company</span>
+        <p>The creative umbrella behind Lyroweb Solution. Sohima Production drives our vision across technology, music, and digital content — enabling real creative output from our interns.</p>
+      </div>
+      <div class="about-card lyricist">
+        <div class="card-logo">Mr.<span class="gold"> Lyricist</span></div>
+        <span class="card-tag tag-gold">Music Distributor</span>
+        <p>Our official music distribution label. The best song written and the best AI short film produced during the internship will be officially released under the Mr. Lyricist label on music platforms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section id="programme">
+  <div class="section-inner">
+    <div class="eyebrow">Internship Programme</div>
+    <h2 class="section-title">7 tracks. 1 month.<br/>Real work.</h2>
+    <p class="section-sub">Choose your track and contribute to live projects. Every intern gets hands-on experience — no busywork, no filler tasks.</p>
+    <div class="tracks-grid">
+      <div class="track-card"><div class="track-emoji">🌐</div><h3>Web Development</h3><p>Build real websites using HTML, CSS, and JavaScript. Work on client-facing projects under senior guidance.</p></div>
+      <div class="track-card"><div class="track-emoji">📱</div><h3>App Development</h3><p>Develop mobile and web applications. Gain hands-on experience with real app projects from ideation to deployment.</p></div>
+      <div class="track-card"><div class="track-emoji">🎵</div><h3>Song Writing</h3><p>Write original lyrics and compositions. The best work gets officially released via Mr. Lyricist label.</p></div>
+      <div class="track-card"><div class="track-emoji">🎬</div><h3>AI Short Movie</h3><p>Create short films using AI generation tools. Script, direct, and produce — the best film gets a real release.</p></div>
+      <div class="track-card"><div class="track-emoji">🎤</div><h3>Singing</h3><p>Record original vocals and contribute to music production. Work alongside our creative production team.</p></div>
+      <div class="track-card"><div class="track-emoji">🎨</div><h3>Poster & Template Design</h3><p>Design marketing materials, social media templates, and brand assets using Canva and other design tools.</p></div>
+      <div class="track-card"><div class="track-emoji">🤖</div><h3>AI Voice Agent</h3><p>Build AI-powered voice assistants and automation tools. Explore the cutting edge of conversational AI.</p></div>
+    </div>
+
+    <div class="perks-row">
+      <div class="perk-box green-box">
+        <div class="perk-label">🏆 Special Perk</div>
+        <h3>Best song gets released</h3>
+        <p>The top song written during the programme will be officially released under the Mr. Lyricist label on major music streaming platforms.</p>
+      </div>
+      <div class="perk-box gold-box">
+        <div class="perk-label">🎬 Special Perk</div>
+        <h3>Best AI movie gets released</h3>
+        <p>The best AI short film created during the internship will be officially released under Sohima Production — a real creative credit on your portfolio.</p>
+      </div>
+    </div>
+
+    <div class="docs-row">
+      <div class="doc-chip">Offer / Joining Letter</div>
+      <div class="doc-chip">Completion Certificate</div>
+      <div class="doc-chip">Experience & Recommendation Letter</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO APPLY -->
+<section id="apply">
+  <div class="section-inner">
+    <div class="eyebrow">How to Apply</div>
+    <h2 class="section-title">Four steps.<br/>Zero confusion.</h2>
+    <p class="section-sub">The process is simple and fully remote. No interview required — just fill the form and start your journey.</p>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Fill the Form</h3>
+        <p>Click "Apply Now" and complete the application form with your details and preferred track.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Get Joining Letter</h3>
+        <p>You'll receive an official Offer & Joining Letter confirming your internship within 48 hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Work for 1 Month</h3>
+        <p>Join your track remotely. Work on real projects, submit your deliverables, and give it your best.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Get Certified</h3>
+        <p>Receive your Completion Certificate and Experience Letter — ready to add to your resume.</p>
+      </div>
+    </div>
+    <div class="apply-cta-box">
+      <h2>Ready to start?</h2>
+      <p>Free · Remote · 1 Month · Open to all backgrounds</p>
+      <a href="https://forms.gle/QqoRSmq1KvZ1KZBx6" target="_blank" class="btn-primary">Apply for Free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="eyebrow">Contact</div>
+    <h2 class="section-title">Get in touch.</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Have questions?</h3>
+        <p>Reach out to us on Instagram or fill the form and we'll get back to you. All internships are remote — location is never a barrier.</p>
+        <div class="contact-links">
+          <a href="https://instagram.com/lyroweb.solution" target="_blank" class="contact-link">
+            <div class="contact-link-icon">📸</div>@lyroweb.solution on Instagram
+          </a>
+          <a href="https://instagram.com/mrlyricist" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🎵</div>@mr._lyricist — Music & Releases
+          </a>
+          <a href="mailto:sohimaproduction@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>sohimaproduction@gmail.com
+          </a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="Enter your full name"/>
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="you@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Your message</label>
+          <textarea placeholder="Ask us anything about the internship..."></textarea>
+        </div>
+        <button class="form-submit">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Lyroweb<span>.Solution</span></div>
+    <div style="color:rgba(255,255,255,0.3);font-size:12px">A Sohima Production Initiative · Mr. Lyricist Label</div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#programme">Programme</a>
+      <a href="#apply">Apply</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
